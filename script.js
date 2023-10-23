@@ -16,17 +16,22 @@ function rgbToHex(rgb) {
 	return color;
 }
 
-const paletteCont = document.querySelector(".palette-container");
+const paletteCont = document.querySelector(".palette__container");
+const saveButton = document.querySelector(".nav__action.save");
 
 function generateRandomPalette(numberOfColors) {
 	for (let i = 0; i < numberOfColors; i++) {
 		const color = generateColor();
 		const colorBox = document.createElement("div");
 		const colorBoxHEXText = document.createElement("input");
+		const copyColorButton = document.createElement("i");
 		// colorBoxHEXText.setAttribute("type", "color");
 		colorBox.style.backgroundColor = `rgb(${color})`;
-		colorBox.classList.add("color-box");
+		colorBox.classList.add("palette__color-box");
 		colorBoxHEXText.value = `#${rgbToHex(color)}`;
+		copyColorButton.classList.add("fa-regular", "fa-clone");
+		//
+		colorBox.appendChild(copyColorButton);
 		colorBox.appendChild(colorBoxHEXText);
 		paletteCont.appendChild(colorBox);
 		// change background color when hex value is changed and adds # if missing
@@ -37,7 +42,7 @@ function generateRandomPalette(numberOfColors) {
 					: `#${colorBoxHEXText.value}`;
 		});
 		// copy hex value to clipboard when box is clicked
-		colorBox.addEventListener("click", () => {
+		copyColorButton.addEventListener("click", () => {
 			navigator.clipboard.writeText(colorBoxHEXText.value);
 		});
 	}
@@ -47,12 +52,6 @@ function clearAndGenerate() {
 	paletteCont.innerHTML = "";
 	generateRandomPalette(5);
 }
-
-const num = document.querySelector("#num");
-const generateButton = document.querySelector("#generatePalette");
-generateButton.addEventListener("click", () => {
-	clearAndGenerate();
-});
 
 document.addEventListener("keydown", (e) => {
 	if (e.key === " " && e.target === document.body) {

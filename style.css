@@ -1,31 +1,63 @@
-* {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
 body {
-	color-scheme: dark;
 	font-family: sans-serif;
-	background-color: #121212;
-	color: #efefef;
 }
 .palette-section {
 	min-height: 100vh;
 	min-height: 100dvh;
-	display: grid;
-	place-items: center;
-	align-content: center;
-	gap: 3rem;
-	padding: 3rem 1rem;
+	display: flex;
+	flex-direction: column;
+	/* border: 3px solid red; */
 }
-.palette-container {
-	width: 90%;
-	min-height: 70vh;
+/* header and nav */
+.palette__nav {
+	height: 55px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.66rem 1rem;
+	background-color: #fff;
+	color: #7d7c82;
+}
+.special {
+	border: 3px solid red;
+}
+.nav__actions {
+	display: flex;
+	gap: 0.8rem;
+	list-style: none;
+	color: #484848;
+}
+.nav__action {
+	display: flex;
+	align-items: center;
+	gap: 0.7em;
+	padding: 0.5em 0.7em;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background 0.1s ease;
+
+	&:hover {
+		background: #f2f2f2;
+	}
+}
+/* main */
+.palette__container {
+	/* border: 3px solid gold; */
+	width: 100%;
+	min-height: calc(100vh - 55px);
+	min-height: calc(100dvh - 55px);
 	/* height: min(70vh, 700px); */
 	display: flex;
 	flex-wrap: wrap;
 }
-.color-box {
+.palette__color-box {
 	flex: 1 1 250px;
 	padding: 2rem 0rem;
 	padding-top: 6rem;
@@ -40,9 +72,21 @@ body {
 		animation: boxActive 0.5s ease forwards;
 	}
 }
-.color-box input {
-	background-color: #121212;
+.palette__color-box i {
+	font-size: 1.5rem;
+	border-radius: 0.8rem;
 	color: inherit;
+	background-color: #ffffff88;
+	padding: 0.8rem;
+	transition: background-color 0.3s ease;
+	margin-bottom: 2rem;
+	&:hover {
+		background-color: #ffffff;
+	}
+}
+.palette__color-box input {
+	color: inherit;
+	background-color: #ffffff;
 	border-radius: 0.8rem;
 	font-size: 1.5rem;
 	padding: 0.5em 1.2em;
@@ -57,22 +101,5 @@ body {
 	to {
 		outline: 3px solid white;
 		outline-offset: -1rem;
-	}
-}
-#generatePalette {
-	cursor: pointer;
-	background-color: transparent;
-	color: inherit;
-	border-radius: 0.8rem;
-	font-size: 1.5rem;
-	padding: 0.5em 1.2em;
-	border: 2px solid currentColor;
-	text-align: center;
-	width: fit-content;
-	outline: 2px solid transparent;
-	transition: outline-offset 0.3s ease;
-	&:focus-visible {
-		outline: 2px solid currentColor;
-		outline-offset: 3px;
 	}
 }
